@@ -9,9 +9,9 @@ This answers Question 6.3 in A. Suciu, *On the topology and combinatorics of dec
 
 On the real cubic $y^2 = x^2(x-1)$, take the 14 points of order dividing 14:
 
-$$
-P_k = \bigl(1,\; 1+t_k^2,\; t_k(1+t_k^2)\bigr), \qquad t_k = \tan\!\left(\tfrac{\pi}{6} + \tfrac{\pi k}{14}\right), \qquad k = 0, \dots, 13.
-$$
+```math
+P_k = \bigl(1,\ 1+t_k^2,\ t_k(1+t_k^2)\bigr), \qquad t_k = \tan\left(\frac{\pi}{6} + \frac{\pi k}{14}\right), \qquad k = 0, \dots, 13.
+```
 
 Three of them are collinear exactly when $k_1 + k_2 + k_3 \equiv 0 \pmod{14}$.
 This gives 26 triple points and no point of higher multiplicity.
@@ -21,15 +21,15 @@ Read as planes in $\mathbb C^3$, the points define a real arrangement $\mathcal 
 
 For the group $G$ of the complement of $\mathcal A$,
 
-$$
-\mathfrak h_3(\mathcal A) \;=\; \mathrm{gr}_3(G) \;\cong\; \mathbb Z^{65} \oplus \mathbb Z/2.
-$$
+```math
+\mathfrak h_3(\mathcal A) = \mathrm{gr}_3(G) \cong \mathbb Z^{65} \oplus \mathbb Z/2.
+```
 
 The points of order dividing 20 on the same cubic (57 triple points) give odd torsion as well:
 
-$$
-\mathfrak h_3 \;=\; \mathrm{gr}_3(G) \;\cong\; \mathbb Z^{153} \oplus \mathbb Z/2 \oplus \mathbb Z/6 \oplus \mathbb Z/6 \oplus \mathbb Z/30.
-$$
+```math
+\mathfrak h_3 = \mathrm{gr}_3(G) \cong \mathbb Z^{153} \oplus \mathbb Z/2 \oplus \mathbb Z/6 \oplus \mathbb Z/6 \oplus \mathbb Z/30.
+```
 
 ## Running the code
 
