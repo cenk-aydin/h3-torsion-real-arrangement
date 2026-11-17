@@ -1,0 +1,58 @@
+name: verify
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  order-14:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: sage
+          channels: conda-forge
+          channel-priority: strict
+
+      - name: Install SageMath 10.6
+        run: mamba install -y sage=10.6
+
+      - name: Exact real realisation
+        run: sage exact_real.sage
+
+      - name: h_3 with certificate
+        run: sage h3_direct.sage
+
+      - name: Braid arrangement A_3 (no torsion)
+        run: H3_TEST=braid4 sage h3_direct.sage
+
+      - name: Order 14
+        run: sage cubic_order_n.sage 14
+
+  order-20:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: sage
+          channels: conda-forge
+          channel-priority: strict
+
+      - name: Install SageMath 10.6
+        run: mamba install -y sage=10.6
+
+      - name: Order 20
+        run: sage cubic_order_n.sage 20

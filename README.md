@@ -1,5 +1,7 @@
 # Torsion in $\mathfrak h_3$ of a real line arrangement
 
+[![verify](https://github.com/cenk-aydin/h3-torsion-real-arrangement/actions/workflows/verify.yml/badge.svg)](https://github.com/cenk-aydin/h3-torsion-real-arrangement/actions/workflows/verify.yml)
+
 This repository contains a real line arrangement whose integral holonomy Lie algebra has torsion in degree 3.
 Equivalently, the third lower central series quotient $\mathrm{gr}_3$ of its fundamental group is not torsion-free.
 This answers Question 6.3 in A. Suciu, *On the topology and combinatorics of decomposable arrangements*,
@@ -46,6 +48,8 @@ sage cubic_order_n.sage 20
 | `exact_real.sage` | Checks in exact arithmetic that the 14 points are real points of the cubic and that their collinear triples are exactly the 26 zero-sum triples. |
 | `h3_direct.sage` | Computes $\mathfrak h_3$ from the holonomy Lie algebra over $\mathbb Z$ and certifies the torsion. With `H3_TEST=braid4` it runs the braid arrangement $A_3$ instead (rank 10, no torsion). |
 | `cubic_order_n.sage N` | Does all of the above for the points of order dividing $N$ (default 14). |
+
+A GitHub Actions workflow runs all scripts with SageMath 10.6 on every push; the badge above links to the runs and their output.
 
 ## Method
 
