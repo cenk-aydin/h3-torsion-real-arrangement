@@ -76,10 +76,11 @@ M2 --script is_decomposable.m2 14 29
 | `exact_real.sage` | Checks in exact arithmetic that the 14 points are real points of the cubic and that their collinear triples are exactly the 26 zero-sum triples. |
 | `h3_direct.sage` | Computes $\mathfrak h_3$ from the holonomy Lie algebra over $\mathbb Z$ and certifies the torsion. With `H3_TEST=braid4` it runs the braid arrangement $A_3$ instead (rank 10, no torsion). |
 | `cubic_order_n.sage N` | Does all of the above for the points of order dividing $N$ (default 14). |
-| `cubic_family.sage A B` | Computes $t$, $\varphi_3$, decomposability and the torsion of $\mathrm{gr}_3$ for $A \le n \le B$, from the cubic part of the integral quadratic closure, which has the same torsion. |
+| `cubic_family.sage A B` | Prints the rows of the table above for $A \le n \le B$. With `--m2` it prints $\varphi_3$ and decomposability in the output format of `is_decomposable.m2`. |
 | `is_decomposable.m2 N Q` | Runs `isDecomposable` of the Macaulay2 package HyperplaneArrangements on the same matroid, realised over $\mathbb Z/Q$ with $Q \equiv 1 \bmod N$ prime. |
 
 A GitHub Actions workflow runs all scripts with SageMath 10.6 on every push; the badge above links to the runs and their output.
+It also checks that the table above is exactly the output of `cubic_family.sage 14 30`, that there is no torsion for $6 \le n \le 13$, and that `isDecomposable` in Macaulay2 prints the same $\varphi_3$ and the same answer as `cubic_family.sage --m2` for $6 \le n \le 14$.
 
 ## Method
 
@@ -89,6 +90,19 @@ In degree 3, $\mathfrak h_3 = \mathbb L_3/[\mathbb L_1, R]$, computed in the Hal
 The torsion is also certified independently in $E^3/(E^1 I^2)$, the cubic part of the quadratic closure of the integral Orlik–Solomon algebra, which has the same torsion as $\mathfrak h_3$.
 For each torsion divisor $d$ the scripts construct an integral cubic $z$ with $dz \in E^1 I^2$ and, for each prime $p \mid d$, a functional that vanishes on $E^1 I^2$ modulo $p$ but not on $z$.
 Both are checked by assertions.
+
+For the table, let $M$ be the boundary map from the 4-element sets that contain a collinear triple to the 3-element sets.
+Up to a free summand, the cokernel of $M$ is the cubic part of the quadratic closure, so the torsion of $\mathrm{gr}_3(G)$ is the torsion of the cokernel of $M$, read off from the Smith normal form of $M$.
+With $r$ the rank of $M$, $d = \binom{n-1}{3} - r$ and $b_3 = \binom{n-1}{2} - t$, the rank of $\mathrm{gr}_3(G)$ is
+
+```math
+\varphi_3 = n t - \binom{n}{3} + b_3 + d .
+```
+
+The arrangement is $\mathbb Q$-decomposable exactly when $\varphi_3 = 2t$.
+`cubic_family.sage` asserts that $\varphi_3 \ge 2t$, and for every prime $p \le 2n+1$ that the rank of $M$ drops modulo $p$ by the number of elementary divisors divisible by $p$.
+For $n = 14, 19, 20, 22$ the torsion and $\varphi_3$ agree with the direct computation in `cubic_order_n.sage`.
+`isDecomposable` computes $\varphi_3$ in a different way, from the Betti numbers of the Orlik–Solomon algebra over $\mathbb Q$.
 
 ## Use of AI
 

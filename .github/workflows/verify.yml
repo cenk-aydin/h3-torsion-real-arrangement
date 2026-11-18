@@ -56,3 +56,62 @@ jobs:
 
       - name: Order 20
         run: sage cubic_order_n.sage 20
+
+  family:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: sage
+          channels: conda-forge
+          channel-priority: strict
+
+      - name: Install SageMath 10.6
+        run: mamba install -y sage=10.6
+
+      - name: Table for n = 6, ..., 30
+        run: sage cubic_family.sage 6 30 | tee table.md
+
+      - name: No torsion for n = 6, ..., 13
+        run: test "$(grep -cE '^\| ([6-9]|1[0-3]) \| .* \| \$0\$ \|$' table.md)" = 8
+
+      - name: The table in the README is the output for n = 14, ..., 30
+        run: diff <(grep -E '^\| (1[4-9]|2[0-9]|30) \|' README.md) <(grep -E '^\| (1[4-9]|2[0-9]|30) \|' table.md)
+
+  macaulay2:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: sage
+          channels: conda-forge
+          channel-priority: strict
+
+      - name: Install SageMath 10.6
+        run: mamba install -y sage=10.6
+
+      - name: Install Macaulay2
+        run: sudo apt-get update && sudo apt-get install -y macaulay2
+
+      - name: isDecomposable in Macaulay2 agrees with cubic_family.sage for n = 6, ..., 14
+        run: |
+          for nq in "6 7" "7 29" "8 17" "9 19" "10 11" "11 23" "12 13" "13 53" "14 29"; do
+            set -- $nq
+            M2 --script is_decomposable.m2 $1 $2 | tee m2.txt
+            grep -q "zero-sum triples: true" m2.txt
+            sage cubic_family.sage $1 $1 --m2 | tee sage.txt
+            diff <(tail -1 m2.txt) sage.txt
+          done
