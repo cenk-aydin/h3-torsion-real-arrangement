@@ -2,7 +2,12 @@ name: verify
 
 on:
   push:
+    branches: [main]
   workflow_dispatch:
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   order-14:
