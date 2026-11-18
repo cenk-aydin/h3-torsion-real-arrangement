@@ -34,7 +34,7 @@ The points of order dividing 20 on the same cubic (57 triple points) give odd to
 ## The cubic family
 
 The points of order dividing $n$ on the same cubic give a real arrangement of $n$ planes for every $n$, with $t$ triple points and no points of higher multiplicity.
-The arrangement is $\mathbb Q$-decomposable exactly when $\varphi_3 = \operatorname{rank} \mathrm{gr}_3(G)$ equals $2t$.
+The arrangement is $\mathbb Q$-decomposable exactly when $\varphi_3$, the rank of $\mathrm{gr}_3(G)$, equals $2t$.
 None of the following is.
 
 | $n$ | $t$ | $\varphi_3$ | $2t$ | torsion of $\mathrm{gr}_3(G)$ |
