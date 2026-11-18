@@ -4,8 +4,6 @@
 
 This repository contains a real line arrangement whose integral holonomy Lie algebra has torsion in degree 3.
 Equivalently, the third lower central series quotient $\mathrm{gr}_3$ of its fundamental group is not torsion-free.
-This answers Question 6.3 in A. Suciu, *On the topology and combinatorics of decomposable arrangements*,
-[arXiv:2404.04784](https://arxiv.org/abs/2404.04784), negatively.
 
 ## The arrangement
 
